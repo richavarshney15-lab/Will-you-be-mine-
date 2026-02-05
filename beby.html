@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Proposal</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: #ffc0cb;
+    text-align: center;
+}
+
+/* Floating Hearts */
+.heart {
+    position: absolute;
+    color: red;
+    font-size: 24px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+h1 {
+    margin-top: 150px;
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.buttons {
+    margin-top: 40px;
+}
+
+button {
+    padding: 15px 40px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 20px;
+}
+
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+}
+
+#noBtn {
+    background-color: #555;
+    color: white;
+    position: absolute;
+}
+
+/* Result message */
+#result {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+.gif {
+    margin-top: 20px;
+    width: 250px;
+}
+
+/* Graffiti hearts */
+.graffiti {
+    position: absolute;
+    font-size: 30px;
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Manav Beby, will you be my Valentine? 💖</h1>
+
+<div class="buttons">
+    <button id="yesBtn">Yes 💕</button>
+    <button id="noBtn">No 😢</button>
+</div>
+
+<div id="result"></div>
+
+<script>
+
+/* Floating hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 20 + "px";
+    heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+setInterval(createHeart, 300);
+
+/* NO button escape */
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("touchstart", moveButton);
+
+function moveButton() {
+    noBtn.style.top = Math.random() * 80 + "vh";
+    noBtn.style.left = Math.random() * 80 + "vw";
+
+    showCryingGif();
+}
+
+/* Crying GIF */
+function showCryingGif() {
+    document.getElementById("result").innerHTML =
+    `<img class="gif" src="https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif">`;
+}
+
+/* YES button action */
+document.getElementById("yesBtn").onclick = function () {
+
+    document.getElementById("result").innerHTML =
+    `I knew you love me ❤️ I love you too
+     <br>
+     <img class="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">`;
+
+    createGraffiti();
+}
+
+/* Graffiti hearts everywhere */
+function createGraffiti() {
+    for(let i=0;i<30;i++){
+        const g = document.createElement("div");
+        g.classList.add("graffiti");
+        g.innerHTML = "💘";
+        g.style.top = Math.random()*100 + "vh";
+        g.style.left = Math.random()*100 + "vw";
+        document.body.appendChild(g);
+    }
+}
+
+</script>
+
+</body>
+</html>
